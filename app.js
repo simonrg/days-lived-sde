@@ -14,7 +14,7 @@ app.use(express.static(__dirname + '/'));
 
 
 //handle data from the page form fields
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
 
 app.post('/form', function(req, res){	//post to ../form url
 	var user = req.body.name;
