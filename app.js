@@ -20,7 +20,7 @@ app.post('/form', function(req, res){
 	var user = req.body.name;
 	var dob = req.body.dob;
 
-	res.send('Name entered: ' + user);
+	res.send('Name entered: ' + user + \n + 'DOB entered: ' + dob);
 	//var days = Date.UTC(2012, dob.getMonth(), dob.getDate(), 0,0,0);
 	//var date = new Date();
 
