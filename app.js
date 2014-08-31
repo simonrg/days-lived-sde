@@ -27,6 +27,7 @@ app.post('/form', function(req, res){
 	var oneDay = 24*60*60*1000;
 	var coutDays = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
 
+	res.send('success');
 	//client.query("INSERT INTO daysalive(name, dob, days, submitted) VALUES ($1, $2, $3, $4)", [user, dob, coutDays, date2]);
 });
 
