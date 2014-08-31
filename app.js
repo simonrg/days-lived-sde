@@ -1,13 +1,12 @@
 var express = require('express');
 var app = express();
 
-var pg = require('pg');
-var connstring = 'pg://postgres:potatogate369@localhost:5432/mydb'
-var client = new pg.Client(connstring);
-client.connect();
+//var pg = require('pg');
+//var connstring = 'pg://postgres:potatogate369@localhost:5432/mydb'
+//var client = new pg.Client(connstring);
+//client.connect();
 
-//client.query("CREATE TABLE IF NOT EXISTS birthdates(username varchar(64))");
-client.query("CREATE TABLE IF NOT EXISTS daysalive(name varchar(64), dob date, days smallint, submitted timestamp)");
+//client.query("CREATE TABLE IF NOT EXISTS daysalive(name varchar(64), dob date, days smallint, submitted timestamp)");
 
 //serve the static html page
 app.use(express.static(__dirname + '/'));
