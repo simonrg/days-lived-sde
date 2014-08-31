@@ -17,9 +17,10 @@ app.use(express.static(__dirname + '/'));
 //app.use(express.bodyParser());
 
 app.post('/form', function(req, res){
-	//var user = req.body.name;
-	//var dob = req.body.dob;
+	var user = req.body.name;
+	var dob = req.body.dob;
 
+	res.send('Name entered: ' + user);
 	//var days = Date.UTC(2012, dob.getMonth(), dob.getDate(), 0,0,0);
 	//var date = new Date();
 
