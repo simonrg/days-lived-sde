@@ -20,12 +20,14 @@ app.post('/form', function(req, res){
 	var user = req.body.name;
 	var dob = req.body.dob;
 
-	res.send('Name entered: ' + user + \n + 'DOB entered: ' + dob);
-	//var days = Date.UTC(2012, dob.getMonth(), dob.getDate(), 0,0,0);
-	//var date = new Date();
+	//calculate days between dob and today
+	var mdy = dob.split('/');
+	var date1 = new Date(mdy[2], mdy[1], mdy[0]);
+	var date2 = new Date();
+	var oneDay = 24*60*60*1000;
+	var coutDays = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
 
-	//client.query("INSERT INTO birthdates(username) values($1)", [user]);
-	//client.query("INSERT INTO daysalive(name, dob) VALUES ($1, $2)", [user, dob]);
+	//client.query("INSERT INTO daysalive(name, dob, days, submitted) VALUES ($1, $2, $3, $4)", [user, dob, coutDays, date2]);
 });
 
 
