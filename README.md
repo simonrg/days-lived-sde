@@ -1,2 +1,2 @@
-days-lived-sde1
+days-lived-sde
 ===============
