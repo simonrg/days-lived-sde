@@ -9,12 +9,12 @@ var app = express();
 //client.query("CREATE TABLE IF NOT EXISTS daysalive(name varchar(64), dob date, days smallint, submitted timestamp)");
 
 //serve the static html page
-app.set('port', (process.env.PORT || 5000))
+app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/'));
 
 
 //handle data from the page form fields
-//app.use(express.bodyParser());
+app.use(express.bodyParser());
 
 app.post('/form', function(req, res){
 	var user = req.body.name;
