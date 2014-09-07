@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 var pg = require('pg');
-var connstring = process.env.DATABASE_URL || 'postgres://localhost:5432/dailyjs'	//'pg://postgres:potatogate369@localhost:5432/mydb'
+var connstring = process.env.DATABASE_URL || 'postgres://localhost:5432/mydb'	//'pg://postgres:potatogate369@localhost:5432/mydb'
 var client = new pg.Client(connstring);
 client.connect();
 
