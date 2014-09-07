@@ -2,34 +2,41 @@ var express = require('express');
 var app = express();
 
 var pg = require('pg');
-var connstring = process.env.DATABASE_URL || 'postgres://localhost:5432/mydb'	//'pg://postgres:potatogate369@localhost:5432/mydb'
+var connstring = process.env.DATABASE_URL || 'pg://postgres:potatogate369@localhost:5432/mydb' //'postgres://localhost:5432/mydb'	
 var client = new pg.Client(connstring);
 client.connect();
 
 var query = client.query("CREATE TABLE IF NOT EXISTS daysalive(name varchar(64), dob date, days smallint, submitted timestamp)");
 query.on('end', function(){client.end();});
 
+pg.connect(process.env.DATABASE_URL, function(err, client) {
+  var query = client.query('SELECT * FROM daysalive');
+
+  query.on('row', function(row) {
+    console.log(JSON.stringify(row));
+});
+
 //serve the static html page
-app.set('port', (process.env.PORT || 5000));
-app.use(express.static(__dirname + '/'));
+// app.set('port', (process.env.PORT || 5000));
+// app.use(express.static(__dirname + '/'));
 
 
 //handle data from the page form fields
-app.use(express.bodyParser());
+// app.use(express.bodyParser());
 
-app.post('/form', function(req, res){
-	var user = req.body.name;
-	var dob = req.body.dob;
+// app.post('/form', function(req, res){
+// 	var user = req.body.name;
+// 	var dob = req.body.dob;
 
-	//calculate days between dob and today
-	var mdy = dob.split('/');
-	var date1 = new Date(mdy[2], mdy[1], mdy[0]);
-	var date2 = new Date();
-	var oneDay = 24*60*60*1000;
-	var coutDays = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
+// 	//calculate days between dob and today
+// 	var mdy = dob.split('/');
+// 	var date1 = new Date(mdy[2], mdy[1], mdy[0]);
+// 	var date2 = new Date();
+// 	var oneDay = 24*60*60*1000;
+// 	var coutDays = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
 
-	//client.query("INSERT INTO daysalive(name, dob, days, submitted) VALUES ($1, $2, $3, $4)", [user, dob, coutDays, date2]);
-});
+// 	//client.query("INSERT INTO daysalive(name, dob, days, submitted) VALUES ($1, $2, $3, $4)", [user, dob, coutDays, date2]);
+// });
 
 
 
