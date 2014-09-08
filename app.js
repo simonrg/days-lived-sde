@@ -42,9 +42,13 @@ app.post('/db', function (request, response) {
     	{
 	      	done();
 	      	if (err)
+	       	{ 
 	       		console.error(err); response.send("Error " + err); 
+	       	}
 	      	else
+	       	{ 
 	       		response.send(result.rows); 
+	       	}
     	});
   	});
 });
