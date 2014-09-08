@@ -48,10 +48,6 @@ app.post('/db', function (request, response) {
 				console.error(err);
 				response.send("Error " + err);
 			}
-			else
-	       	{ 
-	       		response.send(result.rows); 
-	       	}
 		});
     	client.query('SELECT * FROM daysalive', function(err, result) 
     	{
