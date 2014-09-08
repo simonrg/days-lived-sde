@@ -19,8 +19,8 @@ app.get('/db', function (request, response) {
 	var user = request.body.fname;
 	var dob = request.body.dob;
 
-	console.log(user);
-	console.log(dob);
+	response.send('Name entered + ' + request.body.fname);
+	response.send('DOB entered + ' + request.body.dob);
 	//calculate days between dob and today
 	// var mdy = dob.split('/');
 	// var date1 = new Date(mdy[2], mdy[1], mdy[0]);
