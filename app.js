@@ -29,7 +29,7 @@ app.post('/db', function (request, response) {
 	var numdays = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
 
   	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-  		client.query("INSERT INTO daysalive(name, dob, submitted) VALUES ($1, $2, $3)", [user, dob, numdays, date2], function(err, result)
+  		client.query("INSERT INTO daysalive(name, dob, submitted) VALUES ($1, $2, $3, $4)", [user, dob, date2], function(err, result)
 		{ 
 			done(); 
 			if(err)
