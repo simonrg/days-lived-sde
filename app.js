@@ -16,8 +16,8 @@ app.use(express.static(__dirname + '/'));
 //get stuff from the table
 app.get('/db', function (request, response) {
   
-	var user = req.body.name;
-	var dob = req.body.dob;
+	var user = request.body.name;
+	var dob = request.body.dob;
 
 	//calculate days between dob and today
 	var mdy = dob.split('/');
