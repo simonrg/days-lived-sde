@@ -23,7 +23,7 @@ app.post('/db', function (request, response) {
 
 	//calculate days between dob and today
 	var mdy = dob.split('-');
-	var date1 = new Date(mdy[2], mdy[1], mdy[0]);
+	var date1 = new Date(mdy[0], mdy[1], mdy[2]);
 	var timestamp = new Date();
 	var oneDay = 24*60*60*1000;
 	var numdays = Math.round(Math.abs((date1.getTime() - timestamp.getTime())/(oneDay)));
