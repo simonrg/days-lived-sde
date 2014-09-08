@@ -26,11 +26,10 @@ app.post('/db', function (request, response) {
 	var date1 = new Date(mdy[2], mdy[1], mdy[0]);
 	var date2 = new Date();
 	var oneDay = 24*60*60*1000;
-	var coutDays = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
+	var numdays = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
 
   	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-  		//client.query("INSERT INTO daysalive(name) VALUES ($1, $2, $3, $4)", [user, dob, coutDays, date2], function(err, result){ done(); });
-  		client.query("INSERT INTO daysalive(name, dob, days, submitted) VALUES ($1, $2, $3, $4)", [user, dob, coutDays, date2], function(err, result)
+  		client.query("INSERT INTO daysalive(name, dob, submitted) VALUES ($1, $2, $3)", [user, dob, numdays, date2], function(err, result)
 		{ 
 			done(); 
 			if(err)
@@ -43,13 +42,9 @@ app.post('/db', function (request, response) {
     	{
 	      	done();
 	      	if (err)
-	       	{ 
 	       		console.error(err); response.send("Error " + err); 
-	       	}
 	      	else
-	       	{ 
 	       		response.send(result.rows); 
-	       	}
     	});
   	});
 });
