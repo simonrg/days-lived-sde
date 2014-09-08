@@ -39,7 +39,7 @@ app.post('/db', function (request, response) {
 	// });
 
   	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-  		client.query("INSERT INTO daysalive(name) VALUES ($1)", [user], function(err, result){ done(); });
+  		client.query("INSERT INTO daysalive(name) VALUES ($1, $2, $3, $4)", [user, dob, coutDays, date2], function(err, result){ done(); });
     	client.query('SELECT * FROM daysalive', function(err, result) {
 	      	done();
 	      	if (err)
