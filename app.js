@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 var pg = require('pg');
-var connstring = process.env.DATABASE_URL || 'postgres://localhost:5432/mydb'	
+var connstring = process.env.DATABASE_URL || 'postgres://localhost:5432/mydb'
 var client = new pg.Client(connstring);
 client.connect();
 
@@ -28,6 +28,7 @@ app.post('/db', function (request, response) {
 	var oneDay = 24*60*60*1000;
 	var numdays = Math.round(Math.abs((date1.getTime() - datetoday.getTime())/(oneDay)));
 
+  	//original single table insertion of all column fields
   	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   		client.query("INSERT INTO daysalive(name, dob, days, submitted) VALUES ($1, $2, $3, $4)", [user, dob, numdays, datetoday], function(err, result)
 		{ 
