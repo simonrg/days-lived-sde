@@ -17,7 +17,6 @@ app.use(express.bodyParser());
 
 //get stuff from the table
 app.post('/db', function (request, response) {
-  
 	var user = request.body.fname;
 	var dob = request.body.dob;
 
@@ -31,7 +30,7 @@ app.post('/db', function (request, response) {
   	//original single table insertion of all column fields
   	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   		client.query("CREATE TABLE IF NOT EXISTS daysalive(name varchar(64), dob date, days smallint, submitted timestamp)");
-  		client.query("DELETE FROM daysalive WHERE name='fzclioiijgamuh'");
+  		client.query("DELETE FROM daysalive WHERE dob=null");
   		client.query("INSERT INTO daysalive(name, dob, days, submitted) VALUES ($1, $2, $3, $4)", [user, dob, numdays, datetoday], function(err, result)
 		{ 
 			done(); 
@@ -41,6 +40,8 @@ app.post('/db', function (request, response) {
 				response.send("Error " + err);
 			}
 		});
+		//client.query("CREATE TABLE IF NOT EXISTS daysalive2(submitted timestamp)");
+		//client.query("INSERT INTO daysalive2 SELECT timestamp FROM daysalive");
     	client.query('SELECT * FROM daysalive', function(err, result) 
     	{
 	      	done();
@@ -53,6 +54,18 @@ app.post('/db', function (request, response) {
 	       		response.send(result.rows); 
 	       	}
     	});
+    	// client.query('SELECT * FROM daysalive2', function(err, result) 
+    	// {
+	    //   	done();
+	    //   	if (err)
+	    //    	{ 
+	    //    		console.error(err); response.send("Error " + err); 
+	    //    	}
+	    //   	else
+	    //    	{ 
+	    //    		response.send(result.rows); 
+	    //    	}
+    	// });
   	});
 });
 
