@@ -43,19 +43,7 @@ app.post('/db', function (request, response) {
 		client.query("INSERT INTO daysalive2 SELECT timestamp FROM daysalive");
     	
     	//select statements for both tables
-    	client.query('SELECT * FROM daysalive', function(err, result) 
-    	{
-	      	done();
-	      	if (err)
-	       	{ 
-	       		console.error(err); response.send("Error " + err); 
-	       	}
-	      	else
-	       	{ 
-	       		response.send(result.rows); 
-	       	}
-    	});
-    	client.query('SELECT * FROM daysalive2', function(err, result) 
+    	client.query('SELECT * FROM daysalive, daysalive2', function(err, result) 
     	{
 	      	done();
 	      	if (err)
