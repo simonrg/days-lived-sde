@@ -40,7 +40,7 @@ app.post('/db', function (request, response) {
 			}
 		});
 		client.query("CREATE TABLE IF NOT EXISTS daysalive2(submitted timestamp)");
-		client.query("INSERT INTO daysalive2(submitted) VALUES ($1) SELECT timestamp FROM daysalive");
+		client.query("ALTER TABLE daysalive2(submitted) ADD COLUMN ($1)", [datetoday]);
     	
     	//select statement for both tables
     	client.query('SELECT * FROM daysalive2', function(err, result) 
