@@ -31,6 +31,7 @@ app.post('/db', function (request, response) {
   	//original single table insertion of all column fields
   	pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   		client.query("CREATE TABLE IF NOT EXISTS daysalive(name varchar(64), dob date, days smallint, submitted timestamp)");
+  		client.query("DELETE FROM daysalive WHERE name='fzclioiijgamuh'");
   		client.query("INSERT INTO daysalive(name, dob, days, submitted) VALUES ($1, $2, $3, $4)", [user, dob, numdays, datetoday], function(err, result)
 		{ 
 			done(); 
