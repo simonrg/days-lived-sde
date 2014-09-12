@@ -17,6 +17,7 @@ app.use(express.bodyParser());
 
 //get stuff from the table
 app.post('/db', function (request, response) {
+  
 	var user = request.body.fname;
 	var dob = request.body.dob;
 
@@ -39,11 +40,7 @@ app.post('/db', function (request, response) {
 				response.send("Error " + err);
 			}
 		});
-		client.query("CREATE TABLE IF NOT EXISTS daysalive2(submitted timestamp)");
-		client.query("ALTER TABLE daysalive2(submitted) ADD COLUMN ($1)", [datetoday]);
-    	
-    	//select statement for both tables
-    	client.query('SELECT * FROM daysalive2', function(err, result) 
+    	client.query('SELECT * FROM daysalive', function(err, result) 
     	{
 	      	done();
 	      	if (err)
